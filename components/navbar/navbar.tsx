@@ -7,7 +7,6 @@ import { LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const navItems = [
-  { label: "WordPress", href: "/wordpress" },
   { label: "GilgitApp Blog", href: "/gilgitapp-blog" },
   { label: "GilgitApp Social Media", href: "/gilgitapp-social-media" },
   { label: "QuoHR Social Media", href: "/quohr-social-media" },
@@ -28,7 +27,7 @@ export default function Navbar() {
       }}
     >
       {/* Logo */}
-      <Link href="/wordpress" className="flex items-center shrink-0 mr-10">
+      <Link href="/gilgitapp-blog" className="flex items-center shrink-0 mr-10">
         <Image
           src="https://uconnect.pk/wp-content/uploads/2021/10/uConnect-logo.png"
           alt="uConnect Logo"
