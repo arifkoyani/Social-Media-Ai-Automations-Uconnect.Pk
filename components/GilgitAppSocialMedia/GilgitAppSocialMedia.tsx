@@ -51,6 +51,9 @@ export default function GilgitAppSocialMedia() {
       payload.text_on_image = textOnImage.trim();
     }
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 180000);
+
     try {
       const res = await fetch(
         "https://automation.uconnect.work/webhook/278776cb-a9ae-48c3-817e-9fb75a02be8d",
@@ -58,12 +61,15 @@ export default function GilgitAppSocialMedia() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
+          signal: controller.signal,
         }
       );
 
+      clearTimeout(timeoutId);
       await res.json();
       setStatus("sent");
     } catch {
+      clearTimeout(timeoutId);
       setStatus("idle");
     }
   }

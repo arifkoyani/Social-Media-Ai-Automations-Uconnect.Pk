@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="w-full flex items-center px-6 sticky top-0 z-50"
+      className="w-full relative flex items-center px-6 sticky top-0 z-50"
       style={{
         backgroundColor: "#ffffff",
         borderBottom: "1.5px solid #e5e5e5",
@@ -27,7 +27,7 @@ export default function Navbar() {
       }}
     >
       {/* Logo */}
-      <Link href="/gilgitapp-blog" className="flex items-center shrink-0 mr-10">
+      <Link href="/gilgitapp-blog" className="flex items-center shrink-0">
         <Image
           src="https://uconnect.pk/wp-content/uploads/2021/10/uConnect-logo.png"
           alt="uConnect Logo"
@@ -38,8 +38,8 @@ export default function Navbar() {
         />
       </Link>
 
-      {/* Nav Items */}
-      <div className="flex items-center gap-1 flex-1">
+      {/* Nav Items — centered absolutely */}
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
@@ -76,10 +76,10 @@ export default function Navbar() {
         })}
       </div>
 
-      {/* Logout */}
+      {/* Logout — pushed to far right */}
       <button
         onClick={logout}
-        className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+        className="ml-auto flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
         style={{ color: "#454545" }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#e97d2612";

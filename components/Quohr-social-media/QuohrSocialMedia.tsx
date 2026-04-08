@@ -31,6 +31,9 @@ export default function QuohrSocialMedia() {
     setStatus("loading");
     setBufferLink(null);
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 180000);
+
     try {
       const res = await fetch(
         "https://automation.uconnect.work/webhook/34dacf19-082e-4264-b50b-258d4d84653d",
@@ -43,15 +46,18 @@ export default function QuohrSocialMedia() {
             core_message: coreMessage.trim(),
             text_on_image: textOnImage.trim(),
           }),
+          signal: controller.signal,
         }
       );
 
+      clearTimeout(timeoutId);
       const data = await res.json();
       const link = Array.isArray(data) ? data[0]?.Link : data?.Link;
 
       setStatus("sent");
       if (link) setBufferLink(link);
     } catch {
+      clearTimeout(timeoutId);
       setStatus("idle");
     }
   }

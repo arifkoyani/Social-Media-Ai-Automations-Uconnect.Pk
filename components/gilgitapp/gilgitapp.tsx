@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Loader2, CheckCircle2, FileText, Lightbulb, Tag, ExternalLink } from "lucide-react";
+import { Send, Loader2, CheckCircle2, FileText, Lightbulb, Tag, ExternalLink, ShoppingBag } from "lucide-react";
 
 function generateId(length = 10): string {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -36,6 +36,9 @@ export default function GilgitApp() {
     setStatus("loading");
     setBlogLink(null);
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 180000); // 3 minutes
+
     try {
       const res = await fetch(
         "https://automation.uconnect.work/webhook/c63f130e-974f-4590-9234-d2d540d833b4",
@@ -48,15 +51,18 @@ export default function GilgitApp() {
             main_idea: mainIdea.trim(),
             seo_keywords: keywords,
           }),
+          signal: controller.signal,
         }
       );
 
+      clearTimeout(timeoutId);
       const data = await res.json();
       const link = Array.isArray(data) ? data[0]?.link : data?.link;
 
       setStatus("sent");
       if (link) setBlogLink(link);
     } catch {
+      clearTimeout(timeoutId);
       setStatus("idle");
     }
   }
@@ -70,25 +76,47 @@ export default function GilgitApp() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-start justify-center p-6">
-      <div className="w-full max-w-lg">
+    <div className="min-h-screen flex items-start justify-center p-6 relative overflow-hidden"
+      style={{ background: "linear-gradient(135deg, #fff8f3 0%, #ffffff 50%, #f5f9ff 100%)" }}
+    >
+      {/* Background decorative blobs */}
+      <div className="pointer-events-none select-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-30"
+          style={{ background: "radial-gradient(circle, #e97d2630 0%, transparent 70%)" }} />
+        <div className="absolute top-1/2 -right-40 w-80 h-80 rounded-full opacity-20"
+          style={{ background: "radial-gradient(circle, #e97d2625 0%, transparent 70%)" }} />
+        <div className="absolute -bottom-20 left-1/3 w-72 h-72 rounded-full opacity-20"
+          style={{ background: "radial-gradient(circle, #e97d2620 0%, transparent 70%)" }} />
+
+        {/* Grid pattern overlay */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#000" strokeWidth="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      <div className="w-full max-w-lg relative z-10">
 
         {/* Header */}
         <div className="mb-8">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-4" style={{ backgroundColor: "#e97d2615", border: "1px solid #e97d2640" }}>
-            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: "#e97d26" }} />
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-4"
+            style={{ backgroundColor: "#e97d2615", border: "1px solid #e97d2640" }}>
+            <ShoppingBag size={11} style={{ color: "#e97d26" }} />
             <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "#e97d26" }}>GilgitApp</span>
           </div>
-          <h1 className="text-3xl font-bold text-black leading-tight">
-            Create Blog Post
-          </h1>
+          <h1 className="text-3xl font-bold text-black leading-tight">Create Blog Post</h1>
           <p className="mt-2 text-sm" style={{ color: "#454545" }}>
             Fill in the details and publish instantly.
           </p>
         </div>
 
         {/* Card */}
-        <div className="rounded-2xl p-6 space-y-5" style={{ backgroundColor: "#f9f9f9", border: "1px solid #e5e5e5" }}>
+        <div className="rounded-2xl p-6 space-y-5"
+          style={{ backgroundColor: "rgba(255,255,255,0.85)", border: "1px solid #e5e5e5", backdropFilter: "blur(12px)" }}>
 
           {/* Blog Title */}
           <div className="space-y-2">

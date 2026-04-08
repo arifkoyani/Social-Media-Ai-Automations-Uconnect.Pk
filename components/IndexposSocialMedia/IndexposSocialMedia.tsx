@@ -36,6 +36,9 @@ export default function IndexposSocialMedia() {
     setStatus("loading");
     setBufferLink(null);
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 180000);
+
     try {
       const res = await fetch(
         "https://automation.uconnect.work/webhook/7092a879-8ad5-4cbe-bac7-5a62fbcae4ef",
@@ -50,9 +53,11 @@ export default function IndexposSocialMedia() {
             type,
             language,
           }),
+          signal: controller.signal,
         }
       );
 
+      clearTimeout(timeoutId);
       const data = await res.json();
       const link = Array.isArray(data)
         ? (data[0]?.link ?? data[0]?.Link)
@@ -61,6 +66,7 @@ export default function IndexposSocialMedia() {
       setStatus("sent");
       if (link) setBufferLink(link);
     } catch {
+      clearTimeout(timeoutId);
       setStatus("idle");
     }
   }
