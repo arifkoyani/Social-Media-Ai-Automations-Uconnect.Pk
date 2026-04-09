@@ -37,7 +37,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center p-6" style={{ backgroundColor: "#0b141d" }}>
       <div className="w-full max-w-md">
 
         {/* Logo */}
@@ -54,8 +54,8 @@ export default function LoginPage() {
 
         {/* Heading */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-black">Welcome back</h1>
-          <p className="mt-2 text-sm" style={{ color: "#454545" }}>
+          <h1 className="text-3xl font-bold" style={{ color: "#ffffff" }}>Welcome back</h1>
+          <p className="mt-2 text-sm" style={{ color: "#94a3b8" }}>
             Sign in to your account to continue.
           </p>
         </div>
@@ -64,11 +64,11 @@ export default function LoginPage() {
         <form
           onSubmit={handleLogin}
           className="rounded-2xl p-6 space-y-5"
-          style={{ backgroundColor: "#f9f9f9", border: "1.5px solid #e5e5e5" }}
+          style={{ backgroundColor: "#111827", border: "1px solid #1e293b" }}
         >
           {/* Email */}
           <div className="space-y-2">
-            <label className="block text-xs font-semibold uppercase tracking-widest" style={{ color: "#454545" }}>
+            <label className="block text-xs font-semibold uppercase tracking-widest" style={{ color: "#94a3b8" }}>
               Email
             </label>
             <input
@@ -77,16 +77,16 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
               required
-              className="w-full rounded-xl px-4 py-3 text-sm text-black outline-none transition-all duration-200"
-              style={{ backgroundColor: "#ffffff", border: "1.5px solid #e5e5e5" }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "#e97d26")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "#e5e5e5")}
+              className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200"
+              style={{ backgroundColor: "#0f172a", border: "1.5px solid #1e293b", color: "#ffffff" }}
+              onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
+              onBlur={(e) => (e.currentTarget.style.borderColor = "#1e293b")}
             />
           </div>
 
           {/* Password */}
           <div className="space-y-2">
-            <label className="block text-xs font-semibold uppercase tracking-widest" style={{ color: "#454545" }}>
+            <label className="block text-xs font-semibold uppercase tracking-widest" style={{ color: "#94a3b8" }}>
               Password
             </label>
             <div className="relative">
@@ -96,16 +96,16 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full rounded-xl px-4 py-3 pr-11 text-sm text-black outline-none transition-all duration-200"
-                style={{ backgroundColor: "#ffffff", border: "1.5px solid #e5e5e5" }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = "#e97d26")}
-                onBlur={(e) => (e.currentTarget.style.borderColor = "#e5e5e5")}
+                className="w-full rounded-xl px-4 py-3 pr-11 text-sm outline-none transition-all duration-200"
+                style={{ backgroundColor: "#0f172a", border: "1.5px solid #1e293b", color: "#ffffff" }}
+                onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
+                onBlur={(e) => (e.currentTarget.style.borderColor = "#1e293b")}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md transition-colors"
-                style={{ color: "#454545" }}
+                style={{ color: "#94a3b8" }}
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
@@ -114,7 +114,7 @@ export default function LoginPage() {
 
           {/* Error */}
           {error && (
-            <p className="text-sm font-medium rounded-xl px-4 py-2.5" style={{ color: "#e97d26", backgroundColor: "#e97d2610", border: "1px solid #e97d2630" }}>
+            <p className="text-sm font-medium rounded-xl px-4 py-2.5" style={{ color: "#f87171", backgroundColor: "#ef444415", border: "1px solid #ef444430" }}>
               {error}
             </p>
           )}
@@ -124,7 +124,7 @@ export default function LoginPage() {
             type="submit"
             disabled={loading}
             className="w-full flex items-center justify-center gap-2.5 rounded-xl py-3.5 text-sm font-semibold text-white transition-all duration-200 disabled:opacity-70"
-            style={{ backgroundColor: "#e97d26" }}
+            style={{ backgroundColor: "#3b82f6" }}
           >
             {loading ? (
               <>

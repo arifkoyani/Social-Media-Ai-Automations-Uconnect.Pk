@@ -33,14 +33,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       router.replace("/");
     }
     if (isLoggedIn && pathname === "/") {
-      router.replace("/gilgitapp-blog");
+      router.replace("/home");
     }
   }, [isLoggedIn, checked, pathname, router]);
 
   function login() {
     localStorage.setItem("uc_auth", "true");
     setIsLoggedIn(true);
-    router.push("/gilgitapp-blog");
+    router.push("/home");
   }
 
   function logout() {

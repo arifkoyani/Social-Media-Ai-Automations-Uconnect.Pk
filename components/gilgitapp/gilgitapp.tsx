@@ -37,7 +37,7 @@ export default function GilgitApp() {
     setBlogLink(null);
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 180000); // 3 minutes
+    const timeoutId = setTimeout(() => controller.abort(), 180000);
 
     try {
       const res = await fetch(
@@ -76,52 +76,29 @@ export default function GilgitApp() {
   }
 
   return (
-    <div className="min-h-screen flex items-start justify-center p-6 relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #fff8f3 0%, #ffffff 50%, #f5f9ff 100%)" }}
-    >
-      {/* Background decorative blobs */}
-      <div className="pointer-events-none select-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-30"
-          style={{ background: "radial-gradient(circle, #e97d2630 0%, transparent 70%)" }} />
-        <div className="absolute top-1/2 -right-40 w-80 h-80 rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, #e97d2625 0%, transparent 70%)" }} />
-        <div className="absolute -bottom-20 left-1/3 w-72 h-72 rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, #e97d2620 0%, transparent 70%)" }} />
-
-        {/* Grid pattern overlay */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#000" strokeWidth="1"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
-
-      <div className="w-full max-w-lg relative z-10">
+    <div className="min-h-screen flex items-start justify-center p-6" style={{ backgroundColor: "#0b141d" }}>
+      <div className="w-full max-w-lg">
 
         {/* Header */}
         <div className="mb-8">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-4"
-            style={{ backgroundColor: "#e97d2615", border: "1px solid #e97d2640" }}>
-            <ShoppingBag size={11} style={{ color: "#e97d26" }} />
-            <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "#e97d26" }}>GilgitApp</span>
+            style={{ backgroundColor: "#3b82f618", border: "1px solid #3b82f640" }}>
+            <ShoppingBag size={11} style={{ color: "#3b82f6" }} />
+            <span className="text-xs font-medium tracking-widest uppercase" style={{ color: "#3b82f6" }}>GilgitApp</span>
           </div>
-          <h1 className="text-3xl font-bold text-black leading-tight">Create Blog Post</h1>
-          <p className="mt-2 text-sm" style={{ color: "#454545" }}>
+          <h1 className="text-3xl font-bold leading-tight" style={{ color: "#ffffff" }}>Create Blog Post</h1>
+          <p className="mt-2 text-sm" style={{ color: "#94a3b8" }}>
             Fill in the details and publish instantly.
           </p>
         </div>
 
         {/* Card */}
-        <div className="rounded-2xl p-6 space-y-5"
-          style={{ backgroundColor: "rgba(255,255,255,0.85)", border: "1px solid #e5e5e5", backdropFilter: "blur(12px)" }}>
+        <div className="rounded-2xl p-6 space-y-5" style={{ backgroundColor: "#111827", border: "1px solid #1e293b" }}>
 
           {/* Blog Title */}
           <div className="space-y-2">
-            <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest" style={{ color: "#454545" }}>
-              <FileText size={12} style={{ color: "#e97d26" }} />
+            <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest" style={{ color: "#94a3b8" }}>
+              <FileText size={12} style={{ color: "#3b82f6" }} />
               Blog Title
             </label>
             <input
@@ -130,17 +107,17 @@ export default function GilgitApp() {
               onChange={(e) => setBlogTitle(e.target.value)}
               disabled={status === "sent"}
               placeholder="Enter your blog title..."
-              className="w-full rounded-xl px-4 py-3 text-sm text-black outline-none transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ backgroundColor: "#ffffff", border: "1.5px solid #e5e5e5" }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "#e97d26")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "#e5e5e5")}
+              className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+              style={{ backgroundColor: "#0f172a", border: "1.5px solid #1e293b", color: "#ffffff" }}
+              onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
+              onBlur={(e) => (e.currentTarget.style.borderColor = "#1e293b")}
             />
           </div>
 
-          {/* Main Idea / Topic */}
+          {/* Main Idea */}
           <div className="space-y-2">
-            <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest" style={{ color: "#454545" }}>
-              <Lightbulb size={12} style={{ color: "#e97d26" }} />
+            <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest" style={{ color: "#94a3b8" }}>
+              <Lightbulb size={12} style={{ color: "#3b82f6" }} />
               Main Idea / Topic
             </label>
             <input
@@ -149,17 +126,17 @@ export default function GilgitApp() {
               onChange={(e) => setMainIdea(e.target.value)}
               disabled={status === "sent"}
               placeholder="Enter the main idea or topic..."
-              className="w-full rounded-xl px-4 py-3 text-sm text-black outline-none transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ backgroundColor: "#ffffff", border: "1.5px solid #e5e5e5" }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "#e97d26")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "#e5e5e5")}
+              className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+              style={{ backgroundColor: "#0f172a", border: "1.5px solid #1e293b", color: "#ffffff" }}
+              onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
+              onBlur={(e) => (e.currentTarget.style.borderColor = "#1e293b")}
             />
           </div>
 
           {/* SEO Keywords */}
           <div className="space-y-2">
-            <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest" style={{ color: "#454545" }}>
-              <Tag size={12} style={{ color: "#e97d26" }} />
+            <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest" style={{ color: "#94a3b8" }}>
+              <Tag size={12} style={{ color: "#3b82f6" }} />
               SEO Keywords
             </label>
             <input
@@ -168,12 +145,12 @@ export default function GilgitApp() {
               onChange={(e) => setSeoKeywords(e.target.value)}
               disabled={status === "sent"}
               placeholder="keyword1, keyword2, keyword3..."
-              className="w-full rounded-xl px-4 py-3 text-sm text-black outline-none transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ backgroundColor: "#ffffff", border: "1.5px solid #e5e5e5" }}
-              onFocus={(e) => (e.currentTarget.style.borderColor = "#e97d26")}
-              onBlur={(e) => (e.currentTarget.style.borderColor = "#e5e5e5")}
+              className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+              style={{ backgroundColor: "#0f172a", border: "1.5px solid #1e293b", color: "#ffffff" }}
+              onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
+              onBlur={(e) => (e.currentTarget.style.borderColor = "#1e293b")}
             />
-            <p className="text-xs pl-1" style={{ color: "#45454580" }}>Separate keywords with commas</p>
+            <p className="text-xs pl-1" style={{ color: "#475569" }}>Separate keywords with commas</p>
           </div>
 
           {/* Submit Button */}
@@ -183,10 +160,10 @@ export default function GilgitApp() {
             className="w-full mt-2 flex items-center justify-center gap-2.5 rounded-xl py-3.5 text-sm font-semibold transition-all duration-300"
             style={
               status === "sent"
-                ? { backgroundColor: "#e97d2618", border: "1.5px solid #e97d2650", color: "#e97d26", cursor: "pointer" }
+                ? { backgroundColor: "#16a34a18", border: "1.5px solid #16a34a50", color: "#4ade80", cursor: "pointer" }
                 : isReady
-                ? { backgroundColor: "#e97d26", color: "#ffffff", cursor: "pointer" }
-                : { backgroundColor: "#f0f0f0", border: "1.5px solid #e5e5e5", color: "#45454560", cursor: "not-allowed" }
+                ? { backgroundColor: "#3b82f6", color: "#ffffff", cursor: "pointer" }
+                : { backgroundColor: "#1e293b", border: "1.5px solid #1e293b", color: "#475569", cursor: "not-allowed" }
             }
           >
             {status === "loading" && (
@@ -216,14 +193,14 @@ export default function GilgitApp() {
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2.5 rounded-xl py-3.5 text-sm font-semibold transition-all duration-200"
-              style={{ backgroundColor: "#ffffff", border: "1.5px solid #454545", color: "#454545" }}
+              style={{ backgroundColor: "#0f172a", border: "1.5px solid #1e293b", color: "#94a3b8" }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#454545";
+                e.currentTarget.style.backgroundColor = "#1e293b";
                 e.currentTarget.style.color = "#ffffff";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#ffffff";
-                e.currentTarget.style.color = "#454545";
+                e.currentTarget.style.backgroundColor = "#0f172a";
+                e.currentTarget.style.color = "#94a3b8";
               }}
             >
               <ExternalLink size={15} />
