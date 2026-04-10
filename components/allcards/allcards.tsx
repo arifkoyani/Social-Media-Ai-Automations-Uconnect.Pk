@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FileText, Share2, Users, BarChart2,} from "lucide-react";
-
+import { FileText, Share2, Users, BarChart2 } from "lucide-react";
 
 const cards = [
   {
@@ -41,7 +40,7 @@ const cards = [
     label: "GilgitApp Web To FB",
     description: "Push GilgitApp marketplace listings directly to Facebook audiences.",
     href: "/gilgitapp-to-facebook",
-    icon:BarChart2,
+    icon: Share2,
     color: "#1e40af",
     glow: "rgba(30,64,175,0.35)",
   },
@@ -50,11 +49,11 @@ const cards = [
 export default function AllCards() {
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-start px-6 py-16"
+      className="min-h-screen flex flex-col items-start justify-center px-2 py-4"
       style={{ backgroundColor: "#0b141d" }}
     >
       {/* Heading */}
-      <div className="text-start mb-2 max-w-2xl">
+      <div className="text-center mb-2 max-w-2xl">
         <h1 className="text-4xl font-bold text-white leading-tight tracking-tight">
           Create, Manage &amp; Automate Posts from One Place
         </h1>

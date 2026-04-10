@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Loader2, CheckCircle2, AlertCircle, Hash, Link2, Search, MapPin, ChevronDown } from "lucide-react";
+import { Send, Loader2, CheckCircle2, AlertCircle, Hash, Link2, Search, MapPin, ChevronDown, Clipboard, X } from "lucide-react";
 
 const WEBHOOK = "https://automation.uconnect.work/webhook/725d4a81-af65-4ad7-82f3-a220f9190326";
 
@@ -197,17 +197,45 @@ export default function GilgitAppWebFacebook() {
                     <Hash size={12} style={{ color: "#3b82f6" }} />
                     Item ID
                   </label>
-                  <input
-                    type="text"
-                    value={itemId}
-                    onChange={(e) => { setItemId(e.target.value); if (idStatus !== "idle") resetId(); }}
-                    disabled={idStatus === "success"}
-                    placeholder="Enter item ID (e.g. 144251)"
-                    className={inputClass}
-                    style={inputStyle}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
-                    onBlur={(e) => (e.currentTarget.style.borderColor = "#1e293b")}
-                  />
+                  <div className="relative flex items-center">
+                    <button
+                      type="button"
+                      onClick={async () => { const t = await navigator.clipboard.readText(); setItemId(t); if (idStatus !== "idle") resetId(); }}
+                      disabled={idStatus === "success"}
+                      title="Paste from clipboard"
+                      className="absolute left-3 flex items-center justify-center rounded-lg p-2 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                      style={{ cursor: "pointer", color: "#475569", backgroundColor: "#1e293b" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = "#3b82f6"; e.currentTarget.style.backgroundColor = "#3b82f620"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = "#475569"; e.currentTarget.style.backgroundColor = "#1e293b"; }}
+                    >
+                      <Clipboard size={15} />
+                    </button>
+                    <input
+                      type="text"
+                      value={itemId}
+                      onChange={(e) => { setItemId(e.target.value); if (idStatus !== "idle") resetId(); }}
+                      disabled={idStatus === "success"}
+                      placeholder="Enter item ID (e.g. 144251)"
+                      className={inputClass}
+                      style={{ ...inputStyle, paddingLeft: "3rem", paddingRight: itemId ? "3rem" : "1rem" }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "#1e293b")}
+                    />
+                    {itemId && (
+                      <button
+                        type="button"
+                        onClick={() => { setItemId(""); if (idStatus !== "idle") resetId(); }}
+                        disabled={idStatus === "success"}
+                        title="Clear"
+                        className="absolute right-3 flex items-center justify-center rounded-lg p-2 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                        style={{ cursor: "pointer", color: "#475569", backgroundColor: "#1e293b" }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = "#f87171"; e.currentTarget.style.backgroundColor = "#ef444420"; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = "#475569"; e.currentTarget.style.backgroundColor = "#1e293b"; }}
+                      >
+                        <X size={15} />
+                      </button>
+                    )}
+                  </div>
                 </div>
                 <SubmitButton
                   status={idStatus} msg={idMsg} ready={!!itemId.trim()}
@@ -225,17 +253,45 @@ export default function GilgitAppWebFacebook() {
                     <Link2 size={12} style={{ color: "#3b82f6" }} />
                     Item Link
                   </label>
-                  <input
-                    type="url"
-                    value={itemUrl}
-                    onChange={(e) => { setItemUrl(e.target.value); if (urlStatus !== "idle") resetUrl(); }}
-                    disabled={urlStatus === "success"}
-                    placeholder="Paste item URL"
-                    className={inputClass}
-                    style={inputStyle}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
-                    onBlur={(e) => (e.currentTarget.style.borderColor = "#1e293b")}
-                  />
+                  <div className="relative flex items-center">
+                    <button
+                      type="button"
+                      onClick={async () => { const t = await navigator.clipboard.readText(); setItemUrl(t); if (urlStatus !== "idle") resetUrl(); }}
+                      disabled={urlStatus === "success"}
+                      title="Paste from clipboard"
+                      className="absolute left-3 flex items-center justify-center rounded-lg p-2 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                      style={{ cursor: "pointer", color: "#475569", backgroundColor: "#1e293b" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = "#3b82f6"; e.currentTarget.style.backgroundColor = "#3b82f620"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = "#475569"; e.currentTarget.style.backgroundColor = "#1e293b"; }}
+                    >
+                      <Clipboard size={15} />
+                    </button>
+                    <input
+                      type="url"
+                      value={itemUrl}
+                      onChange={(e) => { setItemUrl(e.target.value); if (urlStatus !== "idle") resetUrl(); }}
+                      disabled={urlStatus === "success"}
+                      placeholder="Paste item URL"
+                      className={inputClass}
+                      style={{ ...inputStyle, paddingLeft: "3rem", paddingRight: itemUrl ? "3rem" : "1rem" }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "#1e293b")}
+                    />
+                    {itemUrl && (
+                      <button
+                        type="button"
+                        onClick={() => { setItemUrl(""); if (urlStatus !== "idle") resetUrl(); }}
+                        disabled={urlStatus === "success"}
+                        title="Clear"
+                        className="absolute right-3 flex items-center justify-center rounded-lg p-2 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                        style={{ cursor: "pointer", color: "#475569", backgroundColor: "#1e293b" }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = "#f87171"; e.currentTarget.style.backgroundColor = "#ef444420"; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = "#475569"; e.currentTarget.style.backgroundColor = "#1e293b"; }}
+                      >
+                        <X size={15} />
+                      </button>
+                    )}
+                  </div>
                 </div>
                 <SubmitButton
                   status={urlStatus} msg={urlMsg} ready={!!itemUrl.trim()}
