@@ -49,7 +49,7 @@ const cards = [
 export default function AllCards() {
   return (
     <div
-      className="min-h-screen flex flex-col items-start justify-center px-2 py-4"
+      className="min-h-screen flex flex-col items-center justify-center px-2 py-4"
       style={{ backgroundColor: "#0b141d" }}
     >
       {/* Heading */}
