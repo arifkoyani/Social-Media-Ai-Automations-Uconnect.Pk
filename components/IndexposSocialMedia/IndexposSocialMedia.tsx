@@ -38,7 +38,7 @@ export default function IndexposSocialMedia() {
     setBufferLink(null);
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 180000);
+    const timeoutId = setTimeout(() => controller.abort(), 300000);
 
     try {
       const res = await fetch(
