@@ -7,6 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 
 const USERS = [
   { email: "arifkoyani@gmail.com", password: "allah5121214" },
+  { email: "ehsan@uconnect.pk", password: "uconect121214" },
 ];
 
 export default function LoginPage() {
