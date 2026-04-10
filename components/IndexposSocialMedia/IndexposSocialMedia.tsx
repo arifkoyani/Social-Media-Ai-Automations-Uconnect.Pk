@@ -23,6 +23,7 @@ export default function IndexposSocialMedia() {
   const [language, setLanguage] = useState<Language>("english");
   const [status, setStatus] = useState<"idle" | "loading" | "sent">("idle");
   const [bufferLink, setBufferLink] = useState<string | null>(null);
+  const [responseMsg, setResponseMsg] = useState("");
 
   const isReady =
     postGoal.trim() !== "" &&
@@ -59,11 +60,12 @@ export default function IndexposSocialMedia() {
 
       clearTimeout(timeoutId);
       const data = await res.json();
-      const link = Array.isArray(data)
-        ? (data[0]?.link ?? data[0]?.Link)
-        : (data?.link ?? data?.Link);
+      const item = Array.isArray(data) ? data[0] : data;
+      const link = item?.link ?? item?.Link;
+      const msg = item?.message ?? "Draft Created!";
 
       setStatus("sent");
+      setResponseMsg(msg);
       if (link) setBufferLink(link);
     } catch {
       clearTimeout(timeoutId);
@@ -79,6 +81,7 @@ export default function IndexposSocialMedia() {
     setType("poster");
     setLanguage("english");
     setBufferLink(null);
+    setResponseMsg("");
   }
 
   const selectClass = "w-full rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200 appearance-none disabled:opacity-40 disabled:cursor-not-allowed";
@@ -241,7 +244,7 @@ export default function IndexposSocialMedia() {
             {status === "sent" && (
               <>
                 <CheckCircle2 size={15} />
-                <span>Draft Created! Create Another</span>
+                <span>{responseMsg || "Draft Created!"} — Create Another</span>
               </>
             )}
             {status === "idle" && (
